@@ -3,7 +3,7 @@
 %% tools/ does not regenerate it; see paper/README.md.
 \begin{table}[!t]
 \centering
-\caption{Speaker-disjoint partition of each corpus (speakers per split; identical counts in the three partitions), the test recordings, and the number of encoder windows per test recording (10~s for the self-supervised encoders, the native 30~s window for Whisper).}
+\caption{Speaker-disjoint partition of each corpus as executed (speakers in the training and validation sets of the selected model and in the test set; identical counts in the three partitions), the test recordings, and the number of encoder windows per test recording (10~s for the self-supervised encoders, the native 30~s window for Whisper).}
 \label{tab:splits}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -11,13 +11,13 @@
 \toprule
 Corpus & Train spk. & Val.\ spk. & Test spk. & Test rec. & Windows/rec.\ (10~s) & Windows/rec.\ (30~s) \\
 \midrule
-ADReSS & 108 & 16 & 32 & 32 & 3.6 & 1.5 \\
-VISIA & 127 & 19 & 37 & 37 & 12.9 & 4.7 \\
-NeuroVoz & 74 & 11 & 22 & 207 & 1.0 & 1.0 \\
-PARCZ & 107 & 16 & 31 & 597 & 1.0 & 1.0 \\
-COPERIA cough & 107 & 16 & 31 & 31 & 1.0 & 1.0 \\
-COPERIA /a/ & 107 & 16 & 31 & 31 & 1.8 & 1.0 \\
-Coswara & 1454 & 208 & 416 & 416 & 1.4 & 1.0 \\
+ADReSS & 105 & 19 & 32 & 32 & 3.6 & 1.5 \\
+VISIA & 124 & 22 & 37 & 37 & 12.9 & 4.7 \\
+NeuroVoz & 72 & 13 & 22 & 207 & 1.0 & 1.0 \\
+PARCZ & 104 & 19 & 31 & 597 & 1.0 & 1.0 \\
+COPERIA cough & 104 & 19 & 31 & 31 & 1.0 & 1.0 \\
+COPERIA /a/ & 104 & 19 & 31 & 31 & 1.8 & 1.0 \\
+Coswara & 1412 & 250 & 416 & 416 & 1.4 & 1.0 \\
 \bottomrule
 \end{tabular}}
 \end{table}

@@ -12,7 +12,8 @@ compiles, kept in paper/:
     the rendered pages are also compared at 100 dpi when pdftoppm and Pillow are available, for
     information only, because text and line rendering change between matplotlib versions (with
     matplotlib 3.3 the pages are identical to the article's).
-Files in paper/generated/ that no generator writes are recorded outputs and are listed as such.
+Files in paper/generated/ that no generator writes are recorded outputs and are listed as such; the
+speaker columns of the partition table among them are checked against the protocol logs (check_splits.py).
 Exit status 0 only when every regenerated output matches.
 """
 from __future__ import annotations
@@ -94,6 +95,10 @@ def main() -> int:
         note = "identical rendering" if msg is None else msg + " (rendering only; informational)"
         print(f"info {name}: {note}")
     print("\nrecorded, not regenerated from the released data (see paper/README.md): " + ", ".join(recorded))
+    print("\n--- speaker columns of the partition table against the protocol logs")
+    r = subprocess.run([sys.executable, str(TOOLS / "check_splits.py")], cwd=ROOT, capture_output=True, text=True)
+    print(r.stdout.rstrip())
+    failures += r.returncode != 0
     print("\nALL REGENERATED OUTPUTS MATCH THE ARTICLE" if failures == 0 else f"\n{failures} MISMATCH(ES)")
     return 0 if failures == 0 else 1
 

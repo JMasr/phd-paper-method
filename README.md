@@ -30,14 +30,19 @@ for d in ('screening_stage','extension_stage'):
 
 ## Reproducing the article's tables and figures
 
+The environment is managed with [uv](https://docs.astral.sh/uv/) and pinned in `uv.lock`; the `Makefile` wraps every step:
+
 ```bash
-pip install -r requirements.txt
-python3 tools/reproduce.py
+make install       # create .venv with the pinned dependencies
+make verify-data   # check every data file against its manifest
+make reproduce     # regenerate the tables, macros and figures and compare them with the article
 ```
 
-The four scripts in [`tools/`](tools/) read the two stage folders, check every file against its manifest, and write the article's results tables, the macro files that carry every number quoted in the text, and the two data figures into `outputs/`. `reproduce.py` then compares each output with the copy the article compiles, kept in [`paper/`](paper/), and ends with `ALL REGENERATED OUTPUTS MATCH THE ARTICLE`. The main script also recomputes the analysis engine's own dfa–LoRA contrast in each stage and refuses to run if it does not reproduce it. [`paper/README.md`](paper/README.md) maps every file to its table or figure. The check passes with Python 3.8 and 3.11 and the library versions listed in [`requirements.txt`](requirements.txt).
+`make help` lists the other targets: `tables`, `figures`, `check-splits`, `schematic` (needs Chromium and `pdfcrop`) and `clean`. Without uv, `pip install -r requirements.txt` followed by `python3 tools/reproduce.py` does the same.
 
-The corpus and model descriptors (cohort construction, speaker partitions, age and sex, model sizes) are published in `paper/generated/` as the article prints them but are not regenerated, because they were measured from per-speaker metadata of the corpora, which cannot be redistributed.
+The four scripts in [`tools/`](tools/) read the two stage folders, check every file against its manifest, and write the article's results tables, the macro files that carry every number quoted in the text, and the two data figures into `outputs/`. `reproduce.py` then compares each output with the copy the article compiles, kept in [`paper/`](paper/), and ends with `ALL REGENERATED OUTPUTS MATCH THE ARTICLE`. The main script also recomputes the analysis engine's own dfa–LoRA contrast in each stage and refuses to run if it does not reproduce it. [`paper/README.md`](paper/README.md) maps every file to its table or figure. The check passes with the locked environment (Python 3.11) and also with Python 3.8 and older library versions; see [`requirements.txt`](requirements.txt).
+
+The corpus and model descriptors (cohort construction, speaker partitions, age and sex, model sizes) are published in `paper/generated/` as the article prints them but are not regenerated, because they were measured from per-speaker metadata of the corpora, which cannot be redistributed. The speaker columns of the partition table are the exception that can be checked: `reproduce.py` compares them with the protocol logs of both stages.
 
 ## What is not here
 

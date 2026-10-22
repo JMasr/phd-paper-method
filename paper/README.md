@@ -3,8 +3,8 @@
 This folder holds the files the article compiles: the LaTeX tables and macro files in [`generated/`](generated/) and the figures in [`figs/`](figs/). They are the reference that [`tools/reproduce.py`](../tools/reproduce.py) compares its own outputs against. Run it from the repository root:
 
 ```bash
-pip install -r requirements.txt
-python3 tools/reproduce.py
+make install
+make reproduce
 ```
 
 It writes `outputs/` (not tracked) and ends with `ALL REGENERATED OUTPUTS MATCH THE ARTICLE` when every regenerated file agrees with the one here.
@@ -52,4 +52,4 @@ Supplementary Table S12 (implementation details of the compared arms) and Table 
 
 ## Recorded, not regenerated
 
-`datasets_macros.tex`, `models_macros.tex`, `tab_cohorts.tex` (Supplementary Table S10), `tab_splits.tex` (Supplementary Table S11) and `tab_demographics.tex` (age and sex of the speakers used) describe the corpora and the models. They were measured from the per-speaker metadata of the corpora, which cannot be redistributed, and from the public model checkpoints, so no script here regenerates them; they are published as the article prints them.
+`datasets_macros.tex`, `models_macros.tex`, `tab_cohorts.tex` (Supplementary Table S10), `tab_splits.tex` (Supplementary Table S11) and `tab_demographics.tex` (age and sex of the speakers used) describe the corpora and the models. They were measured from the per-speaker metadata of the corpora, which cannot be redistributed, and from the public model checkpoints, so no script here regenerates them; they are published as the article prints them. The speaker columns of `tab_splits.tex` are the partition as executed, and `tools/check_splits.py` (run by `make reproduce`) checks them against the protocol logs of both stages.
