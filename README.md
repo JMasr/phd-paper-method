@@ -28,13 +28,24 @@ for d in ('screening_stage','extension_stage'):
         print('ok ' if ok else 'BAD', d+'/'+f)"
 ```
 
+## Reproducing the article's tables and figures
+
+```bash
+pip install -r requirements.txt
+python3 tools/reproduce.py
+```
+
+The four scripts in [`tools/`](tools/) read the two stage folders, check every file against its manifest, and write the article's results tables, the macro files that carry every number quoted in the text, and the two data figures into `outputs/`. `reproduce.py` then compares each output with the copy the article compiles, kept in [`paper/`](paper/), and ends with `ALL REGENERATED OUTPUTS MATCH THE ARTICLE`. The main script also recomputes the analysis engine's own dfa–LoRA contrast in each stage and refuses to run if it does not reproduce it. [`paper/README.md`](paper/README.md) maps every file to its table or figure. The check passes with Python 3.8 and 3.11 and the library versions listed in [`requirements.txt`](requirements.txt).
+
+The corpus and model descriptors (cohort construction, speaker partitions, age and sex, model sizes) are published in `paper/generated/` as the article prints them but are not regenerated, because they were measured from per-speaker metadata of the corpora, which cannot be redistributed.
+
 ## What is not here
 
-The repository holds no audio, transcript, speaker identifier or per-speaker prediction. The clinical corpora are governed by their originating agreements and cannot be redistributed: ADReSS is obtained through membership of the DementiaBank consortium, NeuroVoz from a restricted Zenodo record under its owners' data-use agreement, and Coswara from its public repository under CC BY 4.0; no public distribution point for PARCZ could be located; requests concerning COPERIA go to the corresponding author, and VISIA is access-restricted. The analysis code and the scripts that regenerate the article's tables and figures from these files are being prepared for this repository.
+The repository holds no audio, transcript, speaker identifier or per-speaker prediction, and not the training code or the analysis engine that produced the two packages from the training runs; the analysis here starts from the per-run results. The clinical corpora are governed by their originating agreements and cannot be redistributed: ADReSS is obtained through membership of the DementiaBank consortium, NeuroVoz from a restricted Zenodo record under its owners' data-use agreement, and Coswara from its public repository under CC BY 4.0; no public distribution point for PARCZ could be located; requests concerning COPERIA go to the corresponding author, and VISIA is access-restricted.
 
 ## Licence
 
-The data are released under the Creative Commons Attribution 4.0 International licence ([`LICENSE-DATA`](LICENSE-DATA)). Code added to this repository is released under the MIT licence ([`LICENSE`](LICENSE)).
+The data are released under the Creative Commons Attribution 4.0 International licence ([`LICENSE-DATA`](LICENSE-DATA)). The code in `tools/` and `paper/figs/source/` is released under the MIT licence ([`LICENSE`](LICENSE)).
 
 ## Citation and contact
 

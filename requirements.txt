@@ -1,0 +1,6 @@
+# Verified with Python 3.11.2, numpy 2.4.6, scipy 1.17.1, matplotlib 3.11.2, pillow (figure check)
+# and with Python 3.8, numpy 1.19.2, scipy 1.5.2, matplotlib 3.3.2.
+numpy>=1.19
+scipy>=1.5
+matplotlib>=3.3
+pillow>=8
